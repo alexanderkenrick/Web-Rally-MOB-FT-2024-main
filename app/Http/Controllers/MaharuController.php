@@ -15,6 +15,7 @@ class MaharuController extends Controller
                   ->orderBy("name")
                   ->get();
 
+        dd($target);
         $progress = DB::table('maps')->selectRaw("maps.name as name, ifnull(count(results.result), 0) as progress")
                     ->leftJoin("users", "maps.id", "=", "users.map_id")
                     ->leftJoin("results", function($join){
@@ -24,7 +25,7 @@ class MaharuController extends Controller
                     ->groupBy("name")
                     ->orderBy("name")
                     ->get();
-        
+
         $percent = array();
         $img = array();
 
