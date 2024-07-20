@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
         foreach ($posts as $idx => $post) {
             User::query()->create([
                 'name' => $post,
-                'username' => $idx + 1,
+                'username' => "penpos" . $idx + 1,
                 'password' => Hash::make('Penpos@MOBFT24'),
                 'target' => 15
             ]);

@@ -4,7 +4,7 @@
     {{-- Navbar --}}
     <header class="navbar navbar-expand-lg sticky-top nav-mob bg-transparent">
         <nav class="container flex-wrap flex-lg-nowrap">
-            <a class="navbar-brand fw-semibold fs-3 text-mob">PENPOS RALLY MOB FT 2023</a>
+            <a class="navbar-brand fw-semibold fs-3 text-mob">PENPOS RALLY MOB FT 2024</a>
         </nav>
     </header>
     {{-- End Navbar --}}

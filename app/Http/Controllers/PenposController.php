@@ -10,14 +10,26 @@ use App\Models\Result;
 use App\Models\Group;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class PenposController extends Controller
 {
-    public function index()
+    public function index_old()
     {
         $user = User::find(Auth::user()->id);
-        $map = DB::table("maps")->select()->where("id", "=", $user->map_id)->first();
-        $result = DB::table("results")->selectRaw("results.result as result, groups.number as number, results.group_id as group_id")->join("groups", "groups.id", "=", "results.group_id")->where("post_id", "=", $user->id)->get();        $done = array();
+
+        $map = DB::table("maps")
+            ->select()
+            ->where("id", "=", $user->map_id)
+            ->first();
+
+        $result = DB::table("results")
+            ->selectRaw("results.result as result, groups.number as number, results.group_id as group_id")
+            ->join("groups", "groups.id", "=", "results.group_id")
+            ->where("post_id", "=", $user->id)
+            ->get();
+
+        $done = array();
         foreach ($result as $temp) {
             array_push($done, $temp->group_id);
         }
@@ -38,6 +50,30 @@ class PenposController extends Controller
         ]);
     }
 
+    public function index()
+    {
+        // Ambil Nama Value nya aja
+        $maps = Auth::user()->maps()
+                    ->get()
+                    ->pluck('name')
+                    ->toArray();
+
+        // Tim yg udh main
+        $results = Auth::user()
+                    ->groups()
+                    ->get();
+//                    ->pluck('id')
+//                    ->toArray();
+        $idYgUdhMain = $results->pluck('id')->toArray();
+
+        // Tim yg blm main
+        $belumMain = Group::whereNotIn('id', $idYgUdhMain)->get();
+
+//        dd($results);
+
+        return view('penpos', compact('maps', 'results', 'belumMain'));
+    }
+
     public function submit(Request $request)
     {
 
@@ -47,23 +83,30 @@ class PenposController extends Controller
         ]);
         if ($validator->fails()) {
             // $request->session()->flash('valid', 'false');
-            return redirect()->route('penpos')->with("status", "Data yang diisikan belum lengkap");
+            return redirect()->route('penpos')->with("error", "Data yang diisikan belum lengkap!");
         } else {
-            $group_id = $request->get("team");
-            $status = $request->get("status");
-            $post_id = Auth::user()->id;
+            DB::beginTransaction();
+            try {
+                $group_id = $request->get("team");
+                $status = $request->get("status");
+                $post_id = Auth::user()->id;
 
-            $result = new Result();
-            $result->group_id = $group_id;
-            $result->result = $status;
-            $result->post_id = $post_id;
-            $result->save();
+                $result = new Result();
+                $result->group_id = $group_id;
+                $result->result = $status;
+                $result->post_id = $post_id;
+                $result->save();
 
-            $post = User::find(Auth::user()->id);
-            $post->status = "Kosong";
-            $post->save();
+                $post = User::find(Auth::user()->id);
+                $post->status = "Kosong";
+                $post->save();
+                DB::commit();
+                return redirect()->route('penpos')->with("success", "Input data berhasil!");
+            } catch (Exception $x) {
+                DB::rollBack();
+                return redirect()->route('penpos')->with("error", "Input data gagal!");
+            }
 
-            return redirect()->route('penpos')->with("status", "Input data berhasil");
         }
     }
 

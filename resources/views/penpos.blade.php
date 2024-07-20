@@ -5,19 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Penpos Rally MOB FT 2023</title>
+    <title>Penpos Rally MOB FT 2024</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/logo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
-            background-color: #120238;
+            background-color: #390203;
             height: 100%;
         }
 
         .card-body {
             background-color: #faf8fa;
+        }
+
+        .card-header {
+            background-color: #F6F7D7;
         }
     </style>
 </head>
@@ -25,26 +29,37 @@
 <body>
 
     <div class="alert alert-danger text-center" style="">
-        <h1>KAMI DARI DIVISI ITD DENGAN SANGAT MEMOHON JANGAN SAMPE SALAH TEKAN ATAUPUN TIM KOSONGAN</h1>
-        <h2>CEK LAGI SEBELUM MENGINPUT</h2>
+        <h3>KAMI DARI DIVISI ITD DENGAN SANGAT MEMOHON JANGAN SAMPE SALAH TEKAN ATAUPUN TIM KOSONGAN</h3>
+        <h4>CEK LAGI SEBELUM MENGINPUT</h4>
     </div>
+    @if(session()->has('error'))
+        <div class="alert alert-warning" role="alert">
+            {{ session()->get('error') }}
+        </div>
+    @elseif(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div>
-        <a class="btn btn-danger" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-            <i class="fa fa-key"></i> Log Out</a>
-
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>
         <div class="d-flex flex-row justify-content-center align-items-center h-100">
             <div class="card w-100 mx-5">
                 <div class="card-header text-center">
-                    <h1 class="text-mob" style="font-weight: bolder;">{{ $map->name }} - {{ $user->name }}</h1>
-                    <h3 class="text-mob" style="font-weight: bolder;">Status: {{ $user->status }}</h3>
+                    <div class="d-flex justify-content-end mb-2">
+                        <a class="btn btn-danger" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            <i class="fa fa-key"></i> Log Out</a>
+                    </div>
+                    <h1 class="text-mob" style="font-weight: bolder;">{{ auth()->user()->name }}</h1>
+                    <h2 class="text-mob" style="color: #941B0C; font-weight: bolder;">{{ implode(", ", $maps) }}</h2>
+                    <h4 class="text-mob" style="font-weight: bold;">Status: {{ auth()->user()->status }}</h4>
                 </div>
                 <div class="card-body">
-                    <div class="input-section text-center">
+                    <div class="input-section text-center mb-2">
                         <form action="{{ route('penpos-status') }}" method="post">
                             @csrf
                             <div class="team-select my-2 ">
@@ -70,7 +85,7 @@
                                 <br>
                                 <select name="team" id="team" class="form-select" required>
                                     <option value="-" selected disabled>- Pilih Team -</option>
-                                    @foreach ($listGroup as $group)
+                                    @foreach ($belumMain as $group)
                                         <option value="{{ $group->id }}" id="team{{ $group->id }}">
                                             {{ $group->number }}</option>
                                     @endforeach
@@ -93,7 +108,7 @@
                         <div class="card-body text-center">
                             <div class="row">
                                 @foreach ($results as $result)
-                                    <p>Tim {{ $result->number }} - {{ $result->result }}</p>
+                                    <p>Tim {{ $result->number }} - {{ $result->pivot->result }}</p>
                                 @endforeach
                             </div>
                         </div>
