@@ -13,12 +13,21 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
-            background-color: #120238;
+            background-color: #390203;
             height: 100%;
         }
 
+        .card-header {
+            background-color: #941B0C;
+        }
+
+        .card-header > h1 {
+            color: #F6F7D7;
+        }
+
         .card-body {
-            background-color: #faf8fa;
+            /*background-color: #faf8fa;*/
+            background-color: #EAE2B7;
         }
 
         th,
@@ -44,26 +53,26 @@
                     <table class="table align-items-center">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" width="30%">Nama Pos</th>
-                                <th scope="col" class="text-center">Lokasi</th>
-                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center fw-bold" width="50%" style="background-color: #ffcf1a">Nama Pos</th>
+{{--                                <th scope="col" class="text-center">Lokasi</th>--}}
+                                <th scope="col" class="text-center" style="background-color: #ffcf1a;">Status</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             @foreach ($pos as $temp)
                                 <tr>
-                                    <td class="align-middle"><b>{{ $temp->name }}</b></td>
-                                    <td class="align-middle">{{ $temp->location }}</td>
+                                    <td class="align-middle fw-normal" style="background-color: #EAE2B7"><b>{{ $temp->name }}</b></td>
+{{--                                    <td class="align-middle">{{ $temp->location }}</td>--}}
                                     @if ($temp->status == 'Kosong')
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="background-color: #EAE2B7">
                                             <button class="btn btn-success w-100">{{ $temp->status }}</button>
                                         </td>
                                     @elseif ($temp->status == 'Penuh')
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="background-color: #EAE2B7">
                                             <button class="btn btn-danger w-100">{{ $temp->status }}</button>
                                         </td>
                                     @else
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="background-color: #EAE2B7">
                                             <button class="btn btn-warning w-100">{{ $temp->status }}</button>
                                         </td>
                                     @endif

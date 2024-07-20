@@ -15,7 +15,7 @@
         <style>
             @import url('https://fonts.cdnfonts.com/css/sancreek');
             @import url('https://fonts.cdnfonts.com/css/bricolage-grotesque');
-            @import url('https://fonts.cdnfonts.com/css/montserrat');
+            /*@import url('https://fonts.cdnfonts.com/css/montserrat');*/
 
 
             * {
