@@ -17,11 +17,12 @@
         }
 
         .card-body {
-            background-color: #faf8fa;
+            /*background-color: #faf8fa;*/
+            background-color: #EAE2B7;
         }
 
         .card-header {
-            background-color: #F6F7D7;
+            background-color: #FBC907;
         }
     </style>
 </head>

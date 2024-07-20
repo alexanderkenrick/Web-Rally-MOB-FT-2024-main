@@ -1,10 +1,18 @@
 @extends('layouts.user')
 
+@section('css')
+    <style>
+        body, .card {
+            background-color: #390203;
+        }
+    </style>
+@endsection
+
 @section('user_content')
     {{-- Navbar --}}
     <header class="navbar navbar-expand-lg sticky-top nav-mob bg-transparent">
         <nav class="container flex-wrap flex-lg-nowrap">
-            <a class="navbar-brand fw-semibold fs-3 text-mob">PENPOS RALLY MOB FT 2024</a>
+            <a class="navbar-brand fw-semibold fs-3 title-mob" style="color: #FBC907;">PENPOS RALLY MOB FT 2024</a>
         </nav>
     </header>
     {{-- End Navbar --}}
@@ -18,7 +26,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}" class="form-floating">
                             @csrf
-                            <h2 class="text-mob">Masuk</h2>
+                            <h2 class="text-mob" style="color: #F6F7D7;">Masuk</h2>
                             <div class="form-floating mb-3">
                                 <input id="username" type="username"
                                     class="form-control @error('username') is-invalid @enderror form-control-epass"
@@ -43,17 +51,17 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="text-end">
-                                <label>
-                                    <a class="nav-link active" aria-current="page" href="https://forms.gle/2XpRv5rLVAd9cvte6" target="_blank"
-                                    style="color: #242a68"><b>Lupa password?</b></a>
-                                </label>
-                            </div>
+{{--                            <div class="text-end">--}}
+{{--                                <label>--}}
+{{--                                    <a class="nav-link active" aria-current="page" href="https://forms.gle/2XpRv5rLVAd9cvte6" target="_blank"--}}
+{{--                                    style="color: #242a68"><b>Lupa password?</b></a>--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
 
                             <div class="form-group row mb-3 mt-3">
                                 <div class="col-md-12">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <button type="submit" class="btn btn-primary btn-beli">
+                                        <button type="submit" class="btn btn-primary btn-beli" style="background-color: #FBC907; border: none; color: #390203; font-weight: bolder;">
                                             {{ __('Masuk') }}
                                         </button>
                                     </div>

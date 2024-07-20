@@ -12,7 +12,29 @@
         <link rel="stylesheet" href="{{asset('user/custom.css')}}">
         <link rel="stylesheet" href="{{asset('user/owlcarousel/assets/owl.carousel.min.css')}}">
         <link rel="stylesheet" href="{{asset('user/owlcarousel/assets/owl.theme.default.min.css')}}">
+        <style>
+            @import url('https://fonts.cdnfonts.com/css/sancreek');
+            @import url('https://fonts.cdnfonts.com/css/bricolage-grotesque');
+            @import url('https://fonts.cdnfonts.com/css/montserrat');
+
+
+            * {
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .title-mob {
+                font-family: 'Sancreek', sans-serif;
+                color: #390203;
+            }
+
+            .text-mob {
+                /*color: #40128B;*/
+                color: #390203;
+                font-family: "Bricolage Grotesque", sans-serif;
+            }
+        </style>
         @yield('script_midtrans')
+        @yield('css')
     </head>
     <body>
         @yield('user_content')
