@@ -15,8 +15,9 @@ class MaharuController extends Controller
                   ->orderBy("name")
                   ->get();
 
-        dd($target);
-        $progress = DB::table('maps')->selectRaw("maps.name as name, ifnull(count(results.result), 0) as progress")
+//        dd($target);
+        $progress = DB::table('maps')
+                    ->selectRaw("maps.name as name, ifnull(count(results.result), 0) as progress")
                     ->leftJoin("users", "maps.id", "=", "users.map_id")
                     ->leftJoin("results", function($join){
                         $join->on("users.id", "=", "results.post_id");
@@ -25,6 +26,8 @@ class MaharuController extends Controller
                     ->groupBy("name")
                     ->orderBy("name")
                     ->get();
+
+//        dd($progress);
 
         $percent = array();
         $img = array();
@@ -45,11 +48,17 @@ class MaharuController extends Controller
             $percent[$name] = $temp1;
             $img[$name] = $temp2;
         }
-        return view("progress", ["percent"=>$percent, "img"=>$img]);
+
+//        dd($percent);
+//        return view("progress", [
+//            "percent"=>$percent,
+//            "img"=>$img
+//        ]);
+        return view("progress", compact('percent', 'img'));
     }
 
     public function status(){
         $pos = User::all();
-        return view("status", ["pos"=>$pos]);
+        return view("status", compact('pos'));
     }
 }

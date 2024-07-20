@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Models\Group;
 use App\Models\Map;
 use App\Models\Result;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +32,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password',
+        'name',
+        'username',
+        'password',
+        'target',
+        'status'
     ];
 
     /**
@@ -51,5 +57,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function maps() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Map::class,
+            'values',
+            'post_id',
+            'map_id'
+        )
+            ->withTimestamps();
+    }
+
+    public function groups() : BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'results',
+            'post_id',
+            'group_id'
+        )
+            ->withPivot(['result'])
+            ->withTimestamps();
+    }
 
 }

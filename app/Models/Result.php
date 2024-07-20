@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
-    
+    protected $fillable = [
+        "result"
+    ];
+
     public function group()
     {
         return $this->belongsToMany(Group::class);

@@ -29,7 +29,13 @@ class PenposController extends Controller
                 array_push($belumMain, $temp);
             }
         }
-        return view("penpos", ["user" => $user, "groups" => $groups, "map" => $map, "results" => $result, "listGroup" => $belumMain]);
+        return view("penpos", [
+            "user" => $user,
+            "groups" => $groups,
+            "map" => $map,
+            "results" => $result,
+            "listGroup" => $belumMain
+        ]);
     }
 
     public function submit(Request $request)

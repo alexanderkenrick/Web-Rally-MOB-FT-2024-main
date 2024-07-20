@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateResultsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,19 @@ class CreateResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('results', function (Blueprint $table) {
+        Schema::create('values', function (Blueprint $table) {
             $table->foreignId('post_id');
             $table->foreign('post_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->foreignId('group_id');
-            $table->foreign('group_id')
+            $table->foreignId('map_id');
+            $table->foreign('map_id')
                 ->references('id')
-                ->on('groups')
+                ->on('maps')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->enum('result', ['Success','Fail']);
             $table->timestamps();
         });
     }
@@ -39,6 +37,6 @@ class CreateResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('results');
+        Schema::dropIfExists('values');
     }
-}
+};
