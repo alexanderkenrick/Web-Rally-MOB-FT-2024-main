@@ -106,7 +106,6 @@ class PenposController extends Controller
                 DB::rollBack();
                 return redirect()->route('penpos')->with("error", "Input data gagal!");
             }
-
         }
     }
 
