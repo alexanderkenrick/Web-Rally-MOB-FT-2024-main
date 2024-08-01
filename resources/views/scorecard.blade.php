@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="refresh" content="5">
+    {{-- <meta http-equiv="refresh" content="5"> --}}
+    <meta>
     <title>Scoreboard Rally MOB FT 2024</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/logo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -59,7 +60,7 @@
 
         .wrapper {
             position: relative;
-            padding: 0;
+            /* padding: 0; */
         }
     </style>
 </head>
@@ -73,9 +74,12 @@
                     <a href="{{ route('progress') }}" class="btn btn-primary">Back</a>
                 </div>
                 <h1 class="text-mob" style="font-weight: bolder;">Scorecard</h1>
+                <div class="alert alert-light" role="alert" style="font-weight: 500;">
+                    Refresh untuk update status!
+                </div>
             </div>
             <div class="card-body" style="">
-                <div class="row d-flex justify-content-center" style="overflow: auto;">
+                <div class="row d-flex justify-content-center" style="overflow: hidden;">
                     <div class="wrapper">
                         <table class="table align-items-center" data-toggle="table" id="myTable">
                             <thead>
@@ -83,7 +87,7 @@
                                     <th data-fixed-columns="true" scope="col" class="text-center fw-bold sticky-col first-col" width="4.5%" style="background-color: #ffcf1a; font-size: 1rem;">Status</th>
                                     <th data-fixed-columns="true" scope="col" class="text-center sticky-col second-col" style="background-color: #ffcf1a; font-size: 1rem;" width="10%">Games</th>
                                     @foreach($teams as $team)
-                                        <th data-fixed-columns="true" scope="col" class="text-center" style="background-color: #ffcf1a; font-size: 0.5rem;">{{  $team->nama }}</th>
+                                        <th data-fixed-columns="true" scope="col" class="text-center" style="background-color: #ffcf1a; font-size: 0.7rem;">{{  $team->nama }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
@@ -137,7 +141,7 @@
             paging: false,
             scrollCollapse: true,
             scrollX: true,
-            scrollY: 300
+            scrollY: 500
         });
     </script>
 </body>
