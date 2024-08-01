@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'MaharuController@index')->name('progress');
 Route::get('/status', 'MaharuController@status')->name('status');
+Route::get('/scorecard', "MaharuController@scorecard")->name('scorecard');
 Route::view('/test', 'test');
 
 Auth::routes(['register'=>false]);

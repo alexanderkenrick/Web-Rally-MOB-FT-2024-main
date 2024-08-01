@@ -79,6 +79,36 @@ class MaharuController extends Controller
         dd($progress);
     }
 
+    public function scorecard()
+    {
+        $teams = DB::table('teams')
+                    ->orderBy('id', 'ASC')
+                    ->get();
+        $games = DB::table('users')
+                        ->selectRaw('users.id as id, users.name as name, users.status as status')
+                        ->get();
+
+        $results = [];
+        foreach($games as $game) {
+            $temp = [];  // isinya status dan result dari semua tim
+            array_push($temp, $game->status);
+            foreach($teams as $team) {
+                $q = DB::table('results')
+                        ->selectRaw('results.result as result')
+                        ->where('post_id', $game->id)
+                        ->where('team_id', $team->id)
+                        ->get();
+                // dd($q[0]->result);
+                $res = ($q->isEmpty()) ? 'null' : $q[0]->result;
+                array_push($temp, $res);
+            }
+            
+            $results += [$game->name => $temp];
+        }
+        // dd($results);
+        return view('scorecard', compact('teams', 'results'));
+    }
+
     public function status(){
         $pos = User::all();
         return view("status", compact('pos'));
