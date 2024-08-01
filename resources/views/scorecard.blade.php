@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,7 +97,7 @@
                                                 {{-- <td score="col" width="4.5%">{{ $stat }}</td> --}}
                                                 <td score="col" width="4.5%">
                                                     <div style="display: flex; justify-content: center; align-items: center;">
-                                                        <img src="{{ asset('scorecard') }}/{{ $stat }}.png" alt="ilang" width="50%" style="">
+                                                        <img src="{{ asset('scorecard-star') }}/{{ $stat }}.png" alt="ilang" width="50%" style="">
                                                     </div>
                                                 </td>
                                             @endif
