@@ -64,6 +64,7 @@ class MaharuController extends Controller
                     ->join('users', 'users.id', '=', 'values.post_id')
                     ->selectRaw("maps.name as name, ifnull(sum(users.target), 0) as target")
                     ->groupBy('name')
+                    ->orderBy('maps.id', 'ASC')
                     ->get();
 
         $progress = Map::with('posts')
@@ -75,7 +76,7 @@ class MaharuController extends Controller
                 ->groupBy('name')
                 ->orderBy('maps.id', 'ASC')
                 ->get();
-//        dd($target);
+    //    dd($target);
         dd($progress);
     }
 
