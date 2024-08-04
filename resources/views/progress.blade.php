@@ -31,14 +31,15 @@
             @foreach ($targetArray as $itemTarget)
                 <div class="col-md-3 my-3">
                     <div class="card card-rounded mx-3 mx-md-0">
-                        {{-- <img class="h-75" src="{{ asset('image/progress/magic' . $img['Magic'] . '.png') }}"> --}}
+                        @php
+                            $progressValue = collect($progressArray)->firstWhere('name', $itemTarget['name']);
+                            $percentage = (($progressValue['target'] ?? 0) / (float) $itemTarget['target']) * 100;
+                            $stage = floor($percentage / 10);
+                        @endphp
+                        <img class="h-75" src="{{ asset('image/progress_rally/'.$itemTarget['name'].'/'.$stage.'.png') }}">
                         <div class="text-center pt-3" style="background-color: darkred">
                             <h4 class="text-mob text-white">{{ $itemTarget['name'] }}</h4>
-                            @php
-                                $progressValue = collect($progressArray)->firstWhere('name', $itemTarget['name']);
-                                $percentage = (double)($progressValue['target'] ?? 0 / (double)$itemTarget['target']) * 100;
-                            @endphp
-                            <h4 class="text-mob text-white">{{$percentage}}</h4>
+                            <h4 class="text-mob text-white">{{ number_format($percentage, 2) }}%</h4>
                         </div>
                     </div>
                 </div>
