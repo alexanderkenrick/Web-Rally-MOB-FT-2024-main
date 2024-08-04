@@ -31,7 +31,6 @@
             @foreach ($targetArray as $itemTarget)
                 <div class="col-md-3 my-3">
                     <div class="card card-rounded mx-3 mx-md-0">
-                        {{--                    <img class="h-75" src="{{ asset('image/progress/magic' . $img['Problem Solving'] . '.png') }}"> --}}
                         {{-- <img class="h-75" src="{{ asset('image/progress/magic' . $img['Magic'] . '.png') }}"> --}}
                         <div class="text-center pt-3" style="background-color: darkred">
                             <h4 class="text-mob text-white">{{ $itemTarget['name'] }}</h4>
