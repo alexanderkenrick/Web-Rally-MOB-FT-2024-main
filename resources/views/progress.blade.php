@@ -14,6 +14,18 @@
     {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/progress.css') }}">
+    <style>
+        body {
+            background-color: #390203;
+        }
+
+        #scorecard-btn {
+            margin-top: 1rem;
+            width: 80%;
+            background-color: #ffcf1a !important;
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 
 @php
@@ -27,6 +39,7 @@
 
 <body>
     <div class="container text-center pb-5 mb-5 pb-md-0 mb-md-0">
+        <a class="btn fw-bold" id="scorecard-btn" href="{{ route('scorecard') }}">Scorecard</a>
         <div class="row my-md-3 justify-content-center">
             @foreach ($targetArray as $itemTarget)
                 <div class="col-md-3 my-3">
@@ -128,12 +141,13 @@
 
 
             {{-- <div class="floating-container">
-                <div class="floating-button" data-bs-toggle="modal" data-bs-target="#modalMap">
-                    <i class="material-icons">Map
+                <a class="floating-button" href="{{ route('scorecard') }}">
+                    <i class="material-icons">Scorecard
                     </i>
-                </div>
-            </div>
+                </a>
+            </div> --}}
 
+            {{--
             <div class="floating-container-alt">
                 <a class="floating-button" href="{{ route('status') }}" style="text-decoration: none">
                     <i class="material-icons">Info
