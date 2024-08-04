@@ -16,106 +16,118 @@
     <link rel="stylesheet" href="{{ asset('css/progress.css') }}">
 </head>
 
+@php
+    if (isset($target)) {
+        $targetArray = $target->toArray();
+    }
+    if (isset($progress)) {
+        $progressArray = $progress->toArray();
+    }
+@endphp
 
 <body>
     <div class="container text-center pb-5 mb-5 pb-md-0 mb-md-0">
         <div class="row my-md-3 justify-content-center">
-            <div class="col-md-3 my-3">
-                {{-- MAGIC --}}
-                <div class="card card-rounded mx-3 mx-md-0">
-{{--                    <img class="h-75" src="{{ asset('image/progress/magic' . $img['Problem Solving'] . '.png') }}">--}}
-                    <img class="h-75" src="{{ asset('image/progress/magic' . $img['Magic'] . '.png') }}">
-                    <div class="text-center pt-3" style="background-color: darkred">
-                        <h4 class="text-mob text-white">Problem Solving</h4>
-{{--                        <h4 class="text-mob text-white">{{ $percent['Problem Solving'] }}%</h4>--}}
-                        <h4 class="text-mob text-white">{{ $percent['Magic'] }}%</h4>
+            @foreach ($targetArray as $itemTarget)
+                <div class="col-md-3 my-3">
+                    <div class="card card-rounded mx-3 mx-md-0">
+                        {{--                    <img class="h-75" src="{{ asset('image/progress/magic' . $img['Problem Solving'] . '.png') }}"> --}}
+                        {{-- <img class="h-75" src="{{ asset('image/progress/magic' . $img['Magic'] . '.png') }}"> --}}
+                        <div class="text-center pt-3" style="background-color: darkred">
+                            <h4 class="text-mob text-white">{{ $itemTarget['name'] }}</h4>
+                            @php
+                                $progressValue = collect($progressArray)->firstWhere('name', $itemTarget['name']);
+                                $percentage = (double)($progressValue['target'] ?? 0 / (double)$itemTarget['target']) * 100;
+                            @endphp
+                            <h4 class="text-mob text-white">{{$percentage}}</h4>
+                        </div>
                     </div>
                 </div>
+            @endforeach
 
-            </div>
 
-            <div class="col-md-3 my-3">
+            {{-- <div class="col-md-3 my-3">
                 {{-- AI --}}
-                <div class="card card-rounded mx-3 mx-md-0">
-{{--                    <img class="h-75" src="{{ asset('image/progress/ai' . $img['Teamwork'] . '.png') }}">--}}
-                    <img class="h-75" src="{{ asset('image/progress/ai' . $img['AI'] . '.png') }}">
-                    <div class="text-center pt-3" style="background-color: rgb(139, 67, 0)">
-                        <h4 class="text-mob text-white">Teamwork</h4>
-{{--                        <h4 class="text-mob text-white">{{ $percent['Teamwork'] }}%</h4>--}}
-                        <h4 class="text-mob text-white">{{ $percent['AI'] }}%</h4>
-                    </div>
+            {{-- <div class="card card-rounded mx-3 mx-md-0"> --}}
+            {{--                    <img class="h-75" src="{{ asset('image/progress/ai' . $img['Teamwork'] . '.png') }}"> --}}
+            {{-- <img class="h-75" src="{{ asset('image/progress/ai' . $img['AI'] . '.png') }}"> --}}
+            {{-- <div class="text-center pt-3" style="background-color: rgb(139, 67, 0)">
+                        <h4 class="text-mob text-white">Teamwork</h4> --}}
+            {{--                        <h4 class="text-mob text-white">{{ $percent['Teamwork'] }}%</h4> --}}
+            {{-- <h4 class="text-mob text-white">{{ $percent['AI'] }}%</h4> --}}
+            {{-- </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-md-3 my-3">
-                {{-- Real Life --}}
-                <div class="card card-rounded mx-3 mx-md-0">
-{{--                    <img class="h-75" src="{{ asset('image/progress/rl' . $img['Leadership'] . '.png') }}"--}}
-                    <img class="h-75" src="{{ asset('image/progress/rl' . $img['Real Life'] . '.png') }}"
-                        alt="">
-                    <div class="text-center pt-3" style="background-color: rgb(198, 205, 0)">
-                        <h4 class="text-mob text-white">Leadership</h4>
-{{--                        <h4 class="text-mob text-white">{{ $percent['Leadership'] }}%</h4>--}}
-                        <h4 class="text-mob text-white">{{ $percent['Real Life'] }}%</h4>
-                    </div>
+            {{-- <div class="col-md-3 my-3"> --}}
+            {{-- Real Life --}}
+            {{-- <div class="card card-rounded mx-3 mx-md-0"> --}}
+            {{--                    <img class="h-75" src="{{ asset('image/progress/rl' . $img['Leadership'] . '.png') }}" --}}
+            {{-- <img class="h-75" src="{{ asset('image/progress/rl' . $img['Real Life'] . '.png') }}"
+                        alt=""> --}}
+            {{-- <div class="text-center pt-3" style="background-color: rgb(198, 205, 0)">
+                        <h4 class="text-mob text-white">Leadership</h4> --}}
+            {{--                        <h4 class="text-mob text-white">{{ $percent['Leadership'] }}%</h4> --}}
+            {{-- <h4 class="text-mob text-white">{{ $percent['Real Life'] }}%</h4> --}}
+            {{-- </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-md-3 my-3">
-                {{-- Fairy --}}
-                <div class="card card-rounded mx-3 mx-md-0">
-{{--                    <img class="h-75" src="{{ asset('image/progress/fairy' . $img['Kreativitas'] . '.png') }}"--}}
-                    <img class="h-75" src="{{ asset('image/progress/fairy' . $img['Fairy'] . '.png') }}"
-                        alt="">
-                    <div class="text-center pt-3" style="background-color: rgb(1, 96, 1)">
-                        <h4 class="text-mob text-white">Kreativitas</h4>
-{{--                        <h4 class="text-mob text-white">{{ $percent['Kreativitas'] }}%</h4>--}}
-                        <h4 class="text-mob text-white">{{ $percent['Fairy'] }}%</h4>
-                    </div>
+            {{-- <div class="col-md-3 my-3"> --}}
+            {{-- Fairy --}}
+            {{-- <div class="card card-rounded mx-3 mx-md-0"> --}}
+            {{--                    <img class="h-75" src="{{ asset('image/progress/fairy' . $img['Kreativitas'] . '.png') }}" --}}
+            {{-- <img class="h-75" src="{{ asset('image/progress/fairy' . $img['Fairy'] . '.png') }}"
+                        alt=""> --}}
+            {{-- <div class="text-center pt-3" style="background-color: rgb(1, 96, 1)">
+                        <h4 class="text-mob text-white">Kreativitas</h4> --}}
+            {{--                        <h4 class="text-mob text-white">{{ $percent['Kreativitas'] }}%</h4> --}}
+            {{-- <h4 class="text-mob text-white">{{ $percent['Fairy'] }}%</h4> --}}
+            {{-- </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-md-3 my-3">
-                {{-- Space --}}
-                <div class="card card-rounded mx-3 mx-md-0">
-{{--                    <img class="h-75" src="{{ asset('image/progress/space' . $img['Satu'] . '.png') }}"--}}
-                    <img class="h-75" src="{{ asset('image/progress/space' . $img['Space'] . '.png') }}"
+            {{-- <div class="col-md-3 my-3"> --}}
+            {{-- Space --}}
+            {{-- <div class="card card-rounded mx-3 mx-md-0">
+                   <img class="h-75" src="{{ asset('image/progress/space' . $img['Satu'] . '.png') 
+                    {{-- <img class="h-75" src="{{ asset('image/progress/space' . $img['Space'] . '.png') }}"
                         alt="">
                     <div class="text-center pt-3" style="background-color: rgb(25, 45, 112)">
                         <h4 class="text-mob text-white">Satu</h4>
-{{--                        <h4 class="text-mob text-white">{{ $percent['Satu'] }}%</h4>--}}
+                       <h4 class="text-mob text-white">{{ $percent['Satu'] }}%</h4>
                         <h4 class="text-mob text-white">{{ $percent['Space'] }}%</h4>
                     </div>
                 </div>
             </div>
 
 
-{{--            <div class="col-md-3 my-3">--}}
-{{--                --}}{{-- Sporty --}}
-{{--                <div class="card card-rounded mx-3 mx-md-0">--}}
-{{--                    <img class="h-75" src="{{ asset('image/progress/sporty' . $img['Sporty'] . '.png') }}"--}}
-{{--                        alt="">--}}
-{{--                    <div class="text-center pt-3" style="background-color: indigo">--}}
-{{--                        <h4 class="text-mob text-white">Sporty</h4>--}}
-{{--                        <h4 class="text-mob text-white">{{ $percent['Sporty'] }}%</h4>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+{{--            <div class="col-md-3 my-3"> --}}
+            {{--                --}}{{-- Sporty --}}
+            {{--                <div class="card card-rounded mx-3 mx-md-0"> --}}
+            {{--                    <img class="h-75" src="{{ asset('image/progress/sporty' . $img['Sporty'] . '.png') }}" --}}
+            {{--                        alt=""> --}}
+            {{--                    <div class="text-center pt-3" style="background-color: indigo"> --}}
+            {{--                        <h4 class="text-mob text-white">Sporty</h4> --}}
+            {{--                        <h4 class="text-mob text-white">{{ $percent['Sporty'] }}%</h4> --}}
+            {{--                    </div> --}}
+            {{--                </div> --}}
+            {{--            </div> --}}
 
-{{--            <div class="col-md-3 my-3">--}}
-{{--                --}}{{-- Friendship --}}
-{{--                <div class="card card-rounded mx-3 mx-md-0">--}}
-{{--                    <img class="h-75" src="{{ asset('image/progress/bff' . $img['Friendship'] . '.png') }}"--}}
-{{--                        alt="">--}}
-{{--                    <div class="text-center pt-3" style="background-color: rgb(97, 27, 133)">--}}
-{{--                        <h4 class="text-mob text-white">Friendship</h4>--}}
-{{--                        <h4 class="text-mob text-white">{{ $percent['Friendship'] }}%</h4>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--            <div class="col-md-3 my-3"> --}}
+            {{--                --}}{{-- Friendship --}}
+            {{--                <div class="card card-rounded mx-3 mx-md-0"> --}}
+            {{--                    <img class="h-75" src="{{ asset('image/progress/bff' . $img['Friendship'] . '.png') }}" --}}
+            {{--                        alt=""> --}}
+            {{--                    <div class="text-center pt-3" style="background-color: rgb(97, 27, 133)"> --}}
+            {{--                        <h4 class="text-mob text-white">Friendship</h4> --}}
+            {{--                        <h4 class="text-mob text-white">{{ $percent['Friendship'] }}%</h4> --}}
+            {{--                    </div> --}}
+            {{--                </div> --}}
+            {{--            </div> --}}
 
 
-            <div class="floating-container">
+            {{-- <div class="floating-container">
                 <div class="floating-button" data-bs-toggle="modal" data-bs-target="#modalMap">
                     <i class="material-icons">Map
                     </i>
@@ -127,7 +139,7 @@
                     <i class="material-icons">Info
                     </i>
                 </a>
-            </div>
+            </div> --}}
 
 
         </div>
@@ -135,7 +147,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="modalMap" tabindex="-1" aria-hidden="true">
+        {{-- <div class="modal fade" id="modalMap" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -152,10 +164,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Modal Details -->
-        <div class="modal fade" id="modalDetails" tabindex="-1" aria-hidden="true">
+        {{-- <div class="modal fade" id="modalDetails" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -168,7 +180,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
     </div>

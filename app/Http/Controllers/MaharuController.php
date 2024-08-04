@@ -77,7 +77,8 @@ class MaharuController extends Controller
                 ->orderBy('maps.id', 'ASC')
                 ->get();
     //    dd($target);
-        dd($progress);
+        // dd($progress);
+        return view('progress', compact('target', 'progress'));
     }
 
     public function scorecard()
