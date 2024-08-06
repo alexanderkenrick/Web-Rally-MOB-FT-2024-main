@@ -140,12 +140,12 @@
             {{--            </div> --}}
 
 
-            {{-- <div class="floating-container">
-                <a class="floating-button" href="{{ route('scorecard') }}">
-                    <i class="material-icons">Scorecard
+            <div class="floating-container">
+                <div class="floating-button" data-bs-toggle="modal" data-bs-target="#modalMap">
+                    <i class="material-icons">Map
                     </i>
-                </a>
-            </div> --}}
+                </div>
+            </div>
 
             {{--
             <div class="floating-container-alt">
@@ -161,7 +161,7 @@
 
 
         <!-- Modal -->
-        {{-- <div class="modal fade" id="modalMap" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modalMap" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -170,7 +170,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img class="w-100" src="{{ asset('image/map.png') }}" alt="">
+                        <img class="w-100" src="{{ asset('image/map24.png') }}" alt="">
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-primary" aria-label="Details"
                                 data-bs-toggle="modal" data-bs-target="#modalDetails">TF Details</button>
@@ -178,10 +178,10 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <!-- Modal Details -->
-        {{-- <div class="modal fade" id="modalDetails" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modalDetails" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -190,11 +190,11 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img class="w-100" src="{{ asset('image/mapdetails.png') }}" alt="">
+                        <img class="w-100" src="{{ asset('image/mapdetails24.png') }}" alt="">
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
 
     </div>
