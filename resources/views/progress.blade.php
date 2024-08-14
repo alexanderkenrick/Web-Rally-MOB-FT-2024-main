@@ -47,6 +47,10 @@
                         @php
                             $progressValue = collect($progressArray)->firstWhere('name', $itemTarget['name']);
                             $percentage = (($progressValue['target'] ?? 0) / (float) $itemTarget['target']) * 100;
+                            if($percentage > 100)
+                            {
+                                $percentage = 100; 
+                            }
                             $stage = floor($percentage / 10);
                         @endphp
                         <img class="h-75" src="{{ asset('image/progress_rally/'.$itemTarget['name'].'/'.$stage.'.png') }}">
